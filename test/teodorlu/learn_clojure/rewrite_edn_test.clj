@@ -25,3 +25,79 @@
 "]
       (is (= deps-str
              (-> deps-str r/parse-string str))))))
+
+(let [deps-str "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}}
+"]
+  (-> deps-str
+      r/parse-string
+      (r/assoc-in [:aliases :neil :name] 'mylib/mylib)
+      str
+      println))
+
+;; how to I add whitespace with rewrite-edn?
+
+(let [deps-str "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}}
+"]
+  (-> deps-str
+      r/parse-string
+      (r/assoc :aliases {})
+      str
+      println))
+
+(let [deps-str "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}}"]
+  (-> deps-str
+      r/parse-string
+      (r/assoc-in [:aliases :neil] {})
+      str
+      println))
+
+(let [deps-str "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}}
+"]
+  (= "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}
+ :aliases {}}
+"
+     (-> deps-str
+         r/parse-string
+         (r/assoc-in [:aliases] {})
+         str)))
+;; => true
+
+(let [deps-str "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}}
+"]
+  (= "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}
+ :aliases {:neil {}}}
+"
+     (-> deps-str
+         r/parse-string
+         (r/assoc-in [:aliases :neil] {})
+         str)))
+
+;;;;;
+
+(let [deps-str "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}}
+"]
+  (= "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}} :aliases {:neil {}}}
+"
+     (-> deps-str
+         r/parse-string
+         (r/assoc-in [:aliases :neil] {})
+         str)))
+;; => true
