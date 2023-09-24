@@ -16,3 +16,12 @@
     (is my-deps)
     (is (contains? (edn/read-string (str my-deps))
                    :deps))))
+
+(deftest c
+  (testing "rewrite-EDN supports roundtrips and keeps whitespace"
+    (let [deps-str "
+{:deps
+ {hiccup {:mvn/version \"1.0.4\"}}}
+"]
+      (is (= deps-str
+             (-> deps-str r/parse-string str))))))
