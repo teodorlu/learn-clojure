@@ -1,0 +1,20 @@
+name: Run Clojure unit tests
+on: [push, pull_request]
+jobs:
+  Testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install clojure tools
+        uses: DeLaGuardo/setup-clojure@9.4
+        with:
+          cli: latest
+
+      - uses: actions/checkout@master
+
+      - name: Download test deps
+        run: clojure -A:test -e :test-deps-downloaded
+
+      - name: Run tests
+        run: clojure -M:run-tests
