@@ -1,5 +1,6 @@
 (ns teodorlu.learn-clojure-test
-  (:require [clojure.test :refer [deftest is testing]]))
+  (:require
+   [clojure.test :refer [deftest is testing]]))
 
 (deftest mytest
   (testing "addition"
