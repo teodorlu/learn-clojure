@@ -1,0 +1,4 @@
+{:aliases
+ {:kaocha
+  {:extra-deps {lambdaisland/kaocha {:mvn/version "1.86.1355"}}
+   :main-opts ["-m" "kaocha.runner"]}}}
