@@ -1,4 +1,6 @@
-{:aliases
+{:deps
+ {borkdude/rewrite-edn {:mvn/version "0.4.7"}}
+ :aliases
  {:kaocha
   {:extra-deps {lambdaisland/kaocha {:mvn/version "1.86.1355"}}
    :main-opts ["-m" "kaocha.runner"]}}}
